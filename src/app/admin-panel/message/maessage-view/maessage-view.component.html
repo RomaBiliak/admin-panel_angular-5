@@ -1,0 +1,25 @@
+<p>
+  maessage-view works!
+</p>
+<div  *ngIf="message">
+  <p>{{message.theme}}</p>
+  <p>{{message.email}}</p>
+  <p>{{message.date}}</p>
+  <p>{{message.name}}</p>
+  <p>{{message.http_x_real_ip}}</p>
+  <p>{{message.text}}</p>
+  <p>{{message.answer}}</p>
+</div>
+<div *ngIf="messageForm && !message.answer  ">
+<form  [formGroup]="messageForm" (ngSubmit)="onSubmit(messageForm)" >
+  <div class="form-group">
+    <label for="answer">Відповідь</label>
+    <textarea id="answer" type="text" formControlName="answer" rows="10" cols="45" name="text"></textarea>
+    <div *ngIf="checkError('answer' ,'required')" class="alert alert-danger">
+      Обовязкове поле.
+    </div>
+  </div>
+  
+  <input type="submit" class="btn btn-primary" value="Save" [disabled]="messageForm.invalid" />
+</form>
+</div>

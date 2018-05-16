@@ -1,0 +1,119 @@
+<mat-card>
+<div class="container" *ngIf="genomForm && genomData && data">
+	<mat-card-title>{{genomData.name}}</mat-card-title>
+	<form [formGroup]="genomForm" (ngSubmit)="onSubmit(genomForm)" >
+		<div>
+			<mat-form-field class="example-full-width">
+				<input id="name" matInput formControlName="name" placeholder="Name">
+			</mat-form-field>
+			<div *ngIf="checkError('name' ,'required')">
+				Обовязкове поле.
+			</div>
+		</div>
+		<div>
+			<mat-form-field class="example-full-width">
+				<input id="locus" matInput formControlName="locus" placeholder="Locus">
+			</mat-form-field>
+			<div *ngIf="checkError('locus' ,'required')">
+				Обовязкове поле.
+			</div>
+		</div>
+
+    <div>
+			<mat-form-field class="example-full-width">
+				<input id="taxId" matInput formControlName="taxId" placeholder="taxId">
+			</mat-form-field>
+			<div *ngIf="checkError('taxId' ,'required')">
+				Обовязкове поле.
+			</div>
+		</div>
+		
+
+
+    <div class="form-group">
+			<!--<select formControlName="division_id">
+				<option  *ngFor="let d of data?.division" [value]="d.division_id" >{{d.division}}</option>
+			</select>-->
+			<mat-form-field>
+					<mat-select placeholder="Division" formControlName="division_id">
+						<mat-option *ngFor="let d of data?.division" [value]="d.division_id" >
+								{{d.division}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			<div *ngIf="checkError('division_id' ,'required')" >
+				Обовязкове поле.
+			</div>
+		</div>
+    
+    <div class="form-group">
+			<mat-form-field>
+					<mat-select placeholder="Genus" formControlName="genus_id">
+						<mat-option *ngFor="let g of data?.genus" [value]="g.genus_id">
+								{{g.genus}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			<div *ngIf="checkError('genus_id' ,'required')" >
+				Обовязкове поле.
+			</div>
+		</div>
+
+
+    <div>
+			<mat-form-field>
+					<mat-select placeholder="Species" formControlName="species_id" >
+						<mat-option *ngFor="let s of data?.species" [value]="s.species_id">
+								{{s.species}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			<!--	
+			<input id="species_id" type="text" class="form-control" formControlName="species_id">
+			<select formControlName="species_id">
+					<option  *ngFor="let s of data?.species" [value]="s.species_id" >{{s.species}}</option>
+			</select>
+		-->
+			<div *ngIf="checkError('species_id' ,'required')" >
+				Обовязкове поле.
+			</div>
+		</div>
+
+
+    <div>
+			<label for="title">Title:</label>
+			<mat-radio-group id="title" formControlName="title">
+					<mat-radio-button value="long">Long</mat-radio-button>
+					<mat-radio-button value="short">Short</mat-radio-button>
+			</mat-radio-group>
+			<div *ngIf="checkError('title' ,'required')">
+				Обовязкове поле.
+			</div>
+	</div>
+
+
+    <div>
+			<label for="flag_CAI">Flag CAI:</label>
+				<mat-radio-group id="flag_CAI" formControlName="flag_CAI">
+					<mat-radio-button value="1">1</mat-radio-button>
+					<mat-radio-button value="2">2</mat-radio-button>
+					<mat-radio-button value="3">3</mat-radio-button>
+				</mat-radio-group>
+			<div *ngIf="checkError('flag_CAI' ,'required')" >
+				Обовязкове поле.
+			</div>
+	</div>
+    <div>
+		<mat-slide-toggle formControlName="status">Status</mat-slide-toggle>
+	</div>
+ 
+    <div>
+				<a routerLink="../../user/{{genomData.user_id}}">{{genomData.email}}</a>	 
+		</div>
+    <div *ngIf="errorMessage">
+			{{errorMessage}}
+		</div>
+		<button mat-button [disabled]="genomForm.invalid" >Save</button>
+	</form>
+</div>
+</mat-card>
